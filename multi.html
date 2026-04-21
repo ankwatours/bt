@@ -24,6 +24,8 @@
     ></script>
 
     <script defer>
+      let newUrl = window.location.href;
+      console.log(newUrl);
       const BASE_URL = "https://khanieteam.com/s2";
 
       async function getPageContent(page, original) {
@@ -90,6 +92,7 @@
       const params_url = new URLSearchParams(window.location.search);
       let sPage = params_url.get("sp") || null;
       let mg = params_url.get("ed") || params_url.get("edx") || null;
+      let hmg = mg;
       let sOriginal = params_url.get("or") || null;
       let nxtp = params_url.get("nxtp") || null;
       let nxtrl = params_url.get("nxtrl") || null;
@@ -97,6 +100,7 @@
       // sessionStorage.clear();
       let trialCount = sessionStorage.getItem("num_trial");
       let mxTrl = (sPage && params_url.get("spn")) || params_url.get("n") || 2;
+      let ntr = params_url.get("n") || 2;
 
       //Your PHP GOES HERE
       let nbg1 = "htt";
@@ -123,7 +127,11 @@
       if (trialCount >= mxTrl) {
         if (nxtp && nxtp == "yes") {
           sessionStorage.setItem("num_trial", 0);
-          loadurl = convertToN(nxtrl);
+          if (nxtrl) {
+            loadurl = convertToN(nxtrl);
+          } else {
+            loadurl = `${window.location.href}?ed=${hmg}&or=${sOriginal}&n=${ntr}`;
+          }
           window.location.assign(loadurl);
         } else if (sOriginal && sOriginal != "") {
           loadurl = convertToN(sOriginal);
